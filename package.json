@@ -1,0 +1,12 @@
+{
+  "name": "express_server_template",
+  "version": "1.0.0",
+  "description": "An Express Server to use as a reusable template when creating a new application",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
