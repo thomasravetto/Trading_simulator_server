@@ -6,9 +6,7 @@ An Express Server to use as a reusable template when creating a new application.
 - [Overview](#overview)
 - [Project Structure](#project-structure)
 - [Getting Started](#getting-started)
-- [Configuration](#configuration)
 - [Usage](#usage)
-- [License](#license)
 
 ## Overview
 
