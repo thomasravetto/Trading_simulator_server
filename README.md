@@ -62,4 +62,5 @@ npm start
 
 ## Usage
 
-This server should be used as a template to build larger application, it contains basic security and logging functions. Additional packages and functions should be added based on the user preference.
+This server should be used as a template to build larger application, it contains basic security and loggin packages such as  `cors`, `dotenv` and `morgan`.
+To improve security, consider adding additional packages such as `bcrypt` for encryption, `helmet` to set HTTP response headers, and some cookies module.
