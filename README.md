@@ -54,8 +54,8 @@ Then there are the two main files that build the server:
 The following command forks the repository in your own machine, downloads all the dependencies and starts the server.
 
 ```
-git clone https://github.com/your-username/your-repo.git
-cd your-repo
+git clone https://github.com/thomasravetto/Express_Server_Template.git
+cd Express_Server_Template
 npm install
 npm start
 ```
