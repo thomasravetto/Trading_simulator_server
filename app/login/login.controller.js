@@ -8,7 +8,7 @@ async function loginUser (req, res) {
         const { email, password } = req.body;
 
         if (!email || !password) {
-            return res.json({ error: 'Email or Password not provided' });
+            return res.status(400).json({ error: 'Email or Password not provided' });
         }
 
         if (!validateEmail(email)) {
@@ -21,9 +21,9 @@ async function loginUser (req, res) {
             req.session.userid = user.id;
             req.session.username = user.username;
             req.session.email = user.email;
+            req.session.balance = user.balance;
 
-
-            res.json(user);
+            res.status(200).json(user);
         } else {
             return res.status(400).json({error: 'The Email Address or Password is invalid'})
         }

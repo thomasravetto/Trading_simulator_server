@@ -7,7 +7,7 @@ async function registerUser (req, res) {
         const { username, email, password } = req.body;
 
         if (!username || !email || !password) {
-            return res.json({ error: 'Email or Password not provided' });
+            return res.status(400).json({ error: 'Email or Password not provided' });
         }
 
         if (!validateEmail(email)) {
@@ -20,8 +20,9 @@ async function registerUser (req, res) {
             req.session.userid = newUser.id;
             req.session.username = newUser.username;
             req.session.email = newUser.email;
+            req.session.balance = newUser.balance;
 
-            return res.json(newUser);
+            return res.status(200).json(newUser);
         } else {
             res.status(400).json({ error: 'User already exists' });
         }

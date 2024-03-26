@@ -17,8 +17,12 @@ async function removeAssetFromWatchlist (req, res) {
         const { user_id, asset_symbol, asset_name } = req.body;
     
         const removedAsset = await removeAssetFromWatchlistHelper(user_id, asset_symbol, asset_name);
-    
-        res.status(200).json(removedAsset);
+
+        if (!removedAsset.error) {
+            res.status(200).json(removedAsset);
+        } else {
+            res.status(400).json(removedAsset);
+        }
     } catch (error) {
         res.status(400).json({ error: error.message });
     }
@@ -31,7 +35,11 @@ async function loadWatchlist (req, res) {
 
         const userWatchlist = await loadWatchlistHelper(user_id);
 
-        res.status(200).json(userWatchlist);
+        if (!userWatchlist.error) {
+            res.status(200).json(userWatchlist);
+        } else {
+            res.status(400).json(userWatchlist);
+        }
     } catch (error) {
         res.status(400).json({ error: error.message });
     }

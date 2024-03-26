@@ -36,8 +36,9 @@ passport.serializeUser((user, done) => {
     const userid = user.id;
     const username = user.username;
     const email = user.email;
+    const balance = user.balance;
 
-    done(null, { userid: userid, username: username, email: email });
+    done(null, { userid: userid, username: username, email: email, balance: balance });
 });
 
 passport.deserializeUser((user, done) => {

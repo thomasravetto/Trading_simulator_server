@@ -8,8 +8,6 @@ async function handleRegister (username, email, password) {
 
         const newUser = await registerUserIntoDatabase(username, email, hash);
 
-        console.log(newUser)
-
         if (newUser && newUser[0] && newUser[0].email) {
             return newUser[0];
         } else {
@@ -33,5 +31,6 @@ async function hashPassword (password) {
 
 module.exports = {
     handleRegister,
-    validateEmail
+    validateEmail,
+    hashPassword
 }

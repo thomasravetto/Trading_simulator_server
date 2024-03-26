@@ -4,8 +4,9 @@ function sessionChecker (req, res) {
         const id = req.session.userid || req.session.passport.user.userid;
         const username = req.session.username || req.session.passport.user.username;
         const email = req.session.email || req.session.passport.user.email;
+        const balance = req.session.balance || req.session.passport.user.balance;
 
-        res.json({ isAuthenticated: true, id:id, username: username, email: email });
+        res.json({ isAuthenticated: true, id:id, username: username, email: email, balance: balance });
     } else {
         res.json({ isAuthenticated: false });
     }

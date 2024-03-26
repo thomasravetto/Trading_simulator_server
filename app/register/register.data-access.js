@@ -34,6 +34,18 @@ async function registerUserIntoDatabase (username, email, hash) {
     }
 }
 
+async function deleteAllUsers () {
+    try {
+        return db.transaction(async trx => {
+            await trx('users').del();
+            await trx('login').del();
+        })
+    } catch (error) {
+        return error;
+    }
+}
+
 module.exports = {
     registerUserIntoDatabase,
+    deleteAllUsers
 }
