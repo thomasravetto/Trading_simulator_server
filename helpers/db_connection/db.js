@@ -33,22 +33,43 @@ module.exports = db;
 
 /**
 CREATE TABLE login (
-ID serial PRIMARY KEY,
-hash VARCHAR (100) NOT NULL,
-email text UNIQUE NOT NULL
+    ID serial PRIMARY KEY,
+    hash VARCHAR (100) NOT NULL,
+    email text UNIQUE NOT NULL
 );
 
 CREATE TABLE users (
-ID serial PRIMARY KEY,
-name VARCHAR(100),
-email text UNIQUE NOT NULL,
-joined TIMESTAMP NOT NULL
+    ID serial PRIMARY KEY,
+    name VARCHAR(100),
+    FOREIGN KEY (email) REFERENCES login(email),
+    joined TIMESTAMP NOT NULL
 );
 
 CREATE TABLE watchlist (
-ID serial PRIMARY KEY,
-asset_name VARCHAR NOT NULL,
-asset_symbol VARCHAR(255) NOT NULL,
-user_id INT NOT NULL
+    ID serial PRIMARY KEY,
+    asset_name VARCHAR NOT NULL,
+    asset_symbol VARCHAR(255) NOT NULL,
+    FOREIGN KEY (user_id) REFERENCES users(id)
+);
+
+CREATE TABLE transactions (
+    transaction_id SERIAL PRIMARY KEY,
+    user_id INT,
+    asset_symbol VARCHAR(10) NOT NULL,
+    asset_name VARCHAR NOT NULL,
+    transaction_type VARCHAR(10) NOT NULL CHECK (transaction_type IN ('buy', 'sell', 'short')),
+    quantity DECIMAL(18, 2) NOT NULL,
+    price DECIMAL(18, 2) NOT NULL,
+    timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (user_id) REFERENCES users(id)
+);
+
+CREATE TABLE portfolio (
+    portfolio_id SERIAL PRIMARY KEY,
+    user_id INT,
+    asset_symbol VARCHAR(10) NOT NULL,
+    asset_name VARCHAR NOT NULL,
+    quantity DECIMAL(18, 2) NOT NULL,
+    FOREIGN KEY (user_id) REFERENCES users(id)
 );
  */

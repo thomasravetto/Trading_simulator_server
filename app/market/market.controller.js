@@ -1,5 +1,5 @@
 const { fetchAssetData } = require('../../helpers/watchlist/watchlist.helper');
-const { symbolSearchHelper } = require('../../helpers/market/market.helper');
+const { symbolSearchHelper, getLatestDataHelper } = require('../../helpers/market/market.helper');
 
 async function loadAssetData (req, res) {
     try {
@@ -9,6 +9,23 @@ async function loadAssetData (req, res) {
         const assetData = await fetchAssetData(asset_symbol, timeframe, outputsize, fullData);
 
         res.status(200).json(assetData);
+    } catch (error) {
+        res.status(400).json({ error: error.message });
+    }
+}
+
+async function getLatestData (req, res) {
+    try {
+        const { asset_symbol } = req.body;
+
+        const latestData = await getLatestDataHelper(asset_symbol);
+
+        if(latestData) {
+            res.status(200).json(latestData);
+        } else {
+            res.status(400).json(latestData);
+        }
+
     } catch (error) {
         res.status(400).json({ error: error.message });
     }
@@ -28,5 +45,6 @@ async function searchSymbol (req, res) {
 
 module.exports = {
     loadAssetData,
-    searchSymbol
+    searchSymbol,
+    getLatestData
 }

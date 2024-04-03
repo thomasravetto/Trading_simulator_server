@@ -58,6 +58,10 @@ async function loadAssetsPricesHelper (user_id) {
 async function fetchAssetData (asset_symbol, interval, outputsize, fullData=false) {
     let data;
     const intervalType = {
+        '15min': {
+            func: 'TIME_SERIES_INTRADAY',
+            interval: '15min'
+        },
         '30min': {
             func: 'TIME_SERIES_INTRADAY',
             interval: '30min'
@@ -74,7 +78,7 @@ async function fetchAssetData (asset_symbol, interval, outputsize, fullData=fals
         }
     }
 
-    if (interval === '30min' || interval === '60min') {
+    if (interval === '30min' || interval === '60min' || interval === '15min') {
         const resp = await fetch(`https://www.alphavantage.co/query?function=${intervalType[interval].func}&symbol=${asset_symbol}&outputsize=${outputsize}&interval=${intervalType[interval].interval}&apikey=${process.env.API_KEY}`);
         data = await resp.json();
     } else if (interval === 'daily' || interval === 'weekly') {

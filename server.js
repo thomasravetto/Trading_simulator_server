@@ -16,7 +16,7 @@ const server = https.createServer(options, appRouter);
 function startServer () {
     server.listen(PORT, () => {
         console.log('Server listening on Port: ', PORT);
-    })
+    });
 }
 
 if (process.env.NODE_ENV !== 'test') {

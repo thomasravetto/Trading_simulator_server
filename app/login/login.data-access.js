@@ -13,6 +13,19 @@ async function findUserByEmail (email) {
     }
 }
 
+async function findUserById (id) {
+    try {
+        const user = await db('users').where({
+            id: id
+        }).select('*');
+
+        return user;
+    }
+    catch (error) {
+        return { error: error.message };
+    }
+}
+
 async function getUserData (email) {
     try {
         const user = await db('users').where({
@@ -28,5 +41,6 @@ async function getUserData (email) {
 
 module.exports = {
     findUserByEmail,
+    findUserById,
     getUserData,
 }
