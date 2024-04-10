@@ -8,7 +8,8 @@ const PORT = process.env.PORT || 3500;
 
 const options = {
     key: fs.readFileSync(process.env.KEY_LOCATION),
-    cert: fs.readFileSync(process.env.CERT_LOCATION)
+    cert: fs.readFileSync(process.env.CERT_LOCATION),
+    passphrase: process.env.PASSPHRASE
 }
 
 const server = https.createServer(options, appRouter);

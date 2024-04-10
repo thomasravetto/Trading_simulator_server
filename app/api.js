@@ -6,6 +6,7 @@ const oauthRouter = require('./oauth/oauth.api');
 const watchlistRouter = require('./watchlist/watchlist.api');
 const marketRouter = require('./market/market.api');
 const portfolioRouter = require('./portfolio/portfolio.api');
+const usersRouter = require('./users/users.api');
 
 const { sessionChecker } = require('../helpers/session/session_checker.helper');
 
@@ -17,6 +18,7 @@ api.use('/auth', oauthRouter);
 api.use('/watchlist', watchlistRouter);
 api.use('/market', marketRouter);
 api.use('/portfolio', portfolioRouter);
+api.use('/users', usersRouter);
 
 api.use('/check_session', sessionChecker);
 

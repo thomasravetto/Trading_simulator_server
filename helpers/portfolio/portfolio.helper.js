@@ -36,13 +36,15 @@ async function shortAssetHelper (user_id, asset_symbol, asset_name, price, quant
     }
 }
 
-async function sellAssetHelper (user_id, asset_symbol, asset_name, quantity) {
+async function sellAssetHelper (user_id, asset_symbol, asset_name, price, quantity) {
     const operation = 'sell';
     try {
-        const soldAsset = performTransactionIntoDatabase(user_id, asset_symbol, asset_name, operation, quantity);
-
+        const soldAsset = await performTransactionIntoDatabase(user_id, asset_symbol, asset_name, operation, quantity, price);
+        
         if (soldAsset) {
             return soldAsset;
+        } else if(soldAsset.error) {
+            return soldAsset.error;
         }
     } catch (error) {
         return error;

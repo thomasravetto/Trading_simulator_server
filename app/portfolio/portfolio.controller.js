@@ -34,16 +34,17 @@ async function shortAsset (req, res) {
 
 async function sellAsset (req, res) {
     try {
-        const { user_id, asset_symbol, asset_name, quantity } = req.body;
+        const { user_id, asset_symbol, asset_name, price, quantity } = req.body;
 
-        const assetSold = await sellAssetHelper(user_id, asset_symbol, asset_name, quantity);
+        const assetSold = await sellAssetHelper(user_id, asset_symbol, asset_name, price, quantity);
 
         if (assetSold) {
-            res.status(200).json(assetBought);
+            res.status(200).json(assetSold);
         } else {
-            res.status(400).json(assetBought);
+            res.status(400).json(assetSold);
         }
     } catch (error) {
+        console.log(error)
         res.status(400).json({ error: 'Error selling asset' });
     }
 }

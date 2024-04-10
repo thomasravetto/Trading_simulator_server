@@ -9,15 +9,21 @@ async function symbolSearchHelper (symbol) {
     }
 }
 
-async function getLatestDataHelper (asset_symbol) {
+async function getLatestDataHelper (asset_symbols) {
     try {
-        const resp = await fetch(`https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol=${asset_symbol}&apikey=${process.env.API_KEY}`);
-        const data = await resp.json();
+        // Promise.all waits for all promises to get resolved before returning the array
+        let latestData = await Promise.all(asset_symbols.map(async (asset) => {
 
-        const latestData = {
-            'symbol': data['Global Quote']['01. symbol'],
-            'price': data['Global Quote']['05. price']
-        }
+            const resp = await fetch(`https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol=${asset}&apikey=${process.env.API_KEY}`);
+            const data = await resp.json();
+    
+            const latestAssetData = {
+                'symbol': data['Global Quote']['01. symbol'],
+                'price': data['Global Quote']['05. price']
+            }
+    
+            return latestAssetData;
+        }));
 
         return latestData;
     } catch (error) {

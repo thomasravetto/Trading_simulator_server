@@ -1,5 +1,3 @@
-const express = require('express');
-
 const { handleRegister, validateEmail } = require('../../helpers/register/register.helper');
 
 async function registerUser (req, res) {

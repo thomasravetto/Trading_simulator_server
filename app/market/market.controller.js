@@ -16,11 +16,16 @@ async function loadAssetData (req, res) {
 
 async function getLatestData (req, res) {
     try {
-        const { asset_symbol } = req.body;
+        let { asset_symbols } = req.body;
 
-        const latestData = await getLatestDataHelper(asset_symbol);
+        if (!Array.isArray(asset_symbols)) {
+            // wrapping symbol in an array as the function accepts arrays
+            asset_symbols = [asset_symbols];
+        }
 
-        if(latestData) {
+        const latestData = await getLatestDataHelper(asset_symbols);
+
+        if(latestData.length > 0) {
             res.status(200).json(latestData);
         } else {
             res.status(400).json(latestData);
