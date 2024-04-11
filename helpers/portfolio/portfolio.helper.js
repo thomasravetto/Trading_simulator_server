@@ -17,7 +17,7 @@ async function buyAssetHelper (user_id, asset_symbol, asset_name, price, quantit
         }
 
     } catch (error) {
-        return error;
+        return { error: error.message };
     }
 }
 
@@ -32,7 +32,7 @@ async function shortAssetHelper (user_id, asset_symbol, asset_name, price, quant
             return shortedAsset
         }
     } catch (error) {
-        return error;
+        return { error: error.message };
     }
 }
 
@@ -47,7 +47,7 @@ async function sellAssetHelper (user_id, asset_symbol, asset_name, price, quanti
             return soldAsset.error;
         }
     } catch (error) {
-        return error;
+        return { error: error.message };
     }
 }
 
@@ -61,7 +61,7 @@ async function getAllTransactionsHelper (user_id) {
             return transactionsHash;
         }
     } catch (error) {
-        return error;
+        return { error: error.message };
     }
 }
 
@@ -73,7 +73,7 @@ async function getTransactionsForAssetHelper (user_id, asset_symbol) {
             return userTransactions;
         }
     } catch (error) {
-        return error;
+        return { error: error.message };
     }
 }
 
@@ -87,7 +87,7 @@ async function getUserPortfolioHelper (user_id) {
             return [];
         }
     } catch (error) {
-        return error;
+        return { error: error.message };
     }
 }
 
@@ -100,7 +100,7 @@ async function isUserBalanceEnough (user_id, price) {
     
         return balance >= price;
     } catch (error) {
-        return error;
+        return { error: error.message };
     }
 }
 

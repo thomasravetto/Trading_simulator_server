@@ -6,7 +6,7 @@ async function buyAsset (req, res) {
 
         const assetBought = await buyAssetHelper(user_id, asset_symbol, asset_name, price, quantity);
 
-        if (assetBought) {
+        if (assetBought && !assetBought.error) {
             res.status(200).json(assetBought);
         } else {
             res.status(400).json(assetBought);
@@ -38,7 +38,7 @@ async function sellAsset (req, res) {
 
         const assetSold = await sellAssetHelper(user_id, asset_symbol, asset_name, price, quantity);
 
-        if (assetSold) {
+        if (assetSold && !assetSold.error) {
             res.status(200).json(assetSold);
         } else {
             res.status(400).json(assetSold);

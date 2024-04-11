@@ -8,7 +8,7 @@ async function performTransactionIntoDatabase (user_id, asset_symbol, asset_name
             return await performBuyingOrShortingOperation(user_id, asset_symbol, asset_name, operation, quantity, price)
         }
     } catch (error) {
-        return error;
+        return { error: error.message };
     }
 }
 
@@ -56,7 +56,7 @@ async function performBuyingOrShortingOperation (user_id, asset_symbol, asset_na
             return boughtAsset;
         })
     } catch (error) {
-        return error;
+        return { error: error.message };
     }
 }
 
@@ -127,7 +127,7 @@ async function getAllTransactionsFromDatabase (user_id) {
 
         return transactions;
     } catch (error) {
-        return error;
+        return { error: error.message };
     }
 }
 
@@ -142,7 +142,7 @@ async function getTransactionsForAssetFromDatabase (user_id, asset_symbol) {
 
         return transactions;
     } catch (error) {
-        return error;
+        return { error: error.message };
     }
 }
 
@@ -156,7 +156,7 @@ async function getUserPortfolioFromDatabase (user_id) {
 
         return userPortfolio;
     } catch (error) {
-        return error;
+        return { error: error.message };
     }
 }
 
