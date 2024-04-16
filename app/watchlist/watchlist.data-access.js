@@ -32,7 +32,8 @@ async function loadWatchlistFromDatabase (user_id) {
     try {
         const userWatchlist = await db.select('id', 'asset_symbol', 'asset_name')
         .from('watchlist')
-        .where('user_id', `${user_id}`);
+        .where('user_id', `${user_id}`)
+        .orderBy('id', 'desc');
 
         return userWatchlist;
     } catch (error) {

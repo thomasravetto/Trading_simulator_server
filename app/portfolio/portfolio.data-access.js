@@ -138,7 +138,8 @@ async function getTransactionsForAssetFromDatabase (user_id, asset_symbol) {
         .where({
             user_id: user_id,
             asset_symbol: asset_symbol
-        });
+        })
+        .orderBy('timestamp', 'desc');
 
         return transactions;
     } catch (error) {
